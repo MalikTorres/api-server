@@ -1,4 +1,4 @@
-# LAB - Class 02
+# LAB - Class 03
 
 ## Project: Express REST API
 
