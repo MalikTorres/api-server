@@ -22,7 +22,13 @@ router.get('/food/:id', async (req, res, next) => {
 // router.delete('/food/:id', async (req, res, next) => {
 
 // });
+// router.delete('/food/:id', async (req, res, next) => {
+//   try {
 
+//   } catch (error) {
+
+//   }
+// });
 
 router.put('/food/:id', async (req, res, next) => {
   try {

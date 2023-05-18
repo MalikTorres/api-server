@@ -19,10 +19,21 @@ router.get('/ingredient/:id', async (req, res, next) => {
 
 });
 
-// router.delete('/ingredient/:id', async (req, res, next) => {
+/*
+router.delete('/ingredient/:id', async(req,res,next)=>{
+  try {
+    let deletedInredient = await ingredients.Model.findByPk(req.params.id);
+    await ingredientsModel.destroy({where: {id: req.params.id}});
 
-// });
+    res.status(200).send(deletedIngredient);
 
+  } catch (e) {
+    next(e);
+  }
+
+})
+
+*/
 
 router.put('/ingredient/:id', async (req, res, next) => {
   try {
