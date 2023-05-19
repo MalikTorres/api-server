@@ -3,7 +3,7 @@
 const express = require('express');
 
 const router = express.Router();
-const { ingredientsModel } = require('../models/');
+const { ingredientsModel } = require('../models');
 
 router.get('/ingredient', async (req, res, next) => {
   let ingredients = await ingredientsModel.findAll();
@@ -19,10 +19,10 @@ router.get('/ingredient/:id', async (req, res, next) => {
 
 });
 
-/*
+
 router.delete('/ingredient/:id', async(req,res,next)=>{
   try {
-    let deletedInredient = await ingredients.Model.findByPk(req.params.id);
+    let deletedIngredient = await ingredientsModel.findByPk(req.params.id);
     await ingredientsModel.destroy({where: {id: req.params.id}});
 
     res.status(200).send(deletedIngredient);
@@ -31,9 +31,9 @@ router.delete('/ingredient/:id', async(req,res,next)=>{
     next(e);
   }
 
-})
+});
 
-*/
+
 
 router.put('/ingredient/:id', async (req, res, next) => {
   try {

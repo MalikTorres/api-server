@@ -3,7 +3,7 @@
 const express = require('express');
 
 const router = express.Router();
-const { foodModel } = require('../models/');
+const { foodModel, ingredientsModel } = require('../models');
 
 router.get('/food', async (req, res, next) => {
   let foods = await foodModel.findAll();
@@ -19,16 +19,28 @@ router.get('/food/:id', async (req, res, next) => {
 
 });
 
-// router.delete('/food/:id', async (req, res, next) => {
+// Router with ingredients, relational aspect
+router.get('/foodWithIngredients', async (req, res, next) => {
+  let foods = await foodModel.findAll({include: {model: ingredientsModel}});
 
-// });
-// router.delete('/food/:id', async (req, res, next) => {
-//   try {
+  res.status(200).send(foods);
 
-//   } catch (error) {
+});
 
-//   }
-// });
+
+router.delete('/food/:id', async(req,res,next)=>{
+  try {
+    let deletedFood = await foodModel.findByPk(req.params.id);
+    await foodModel.destroy({where: {id: req.params.id}});
+
+    res.status(200).send(deletedFood);
+
+  } catch (e) {
+    next(e);
+  }
+
+});
+
 
 router.put('/food/:id', async (req, res, next) => {
   try {
