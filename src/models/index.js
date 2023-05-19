@@ -20,8 +20,8 @@ const ingredientsModel = ingredients(sequelizeDatabase, DataTypes);
 
 
 // create associations
-foodModel.hasMany(ingredientsModel);
-ingredientsModel.belongsTo(foodModel);
+// foodModel.hasMany(ingredientsModel);
+// ingredientsModel.belongsTo(foodModel);
 
 module.exports = {
   sequelizeDatabase,

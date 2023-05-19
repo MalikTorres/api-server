@@ -20,12 +20,12 @@ router.get('/food/:id', async (req, res, next) => {
 });
 
 // Router with ingredients, relational aspect
-router.get('/foodWithIngredients', async (req, res, next) => {
-  let foods = await foodModel.findAll({include: {model: ingredientsModel}});
+// router.get('/foodWithIngredients', async (req, res, next) => {
+//   let foods = await foodModel.findAll({include: {model: ingredientsModel}});
 
-  res.status(200).send(foods);
+//   res.status(200).send(foods);
 
-});
+// });
 
 
 router.delete('/food/:id', async(req,res,next)=>{

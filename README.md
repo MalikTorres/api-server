@@ -41,3 +41,8 @@ to run tests, after running `npm i`, run the command `npm test`
 #### UML
 
 ![UML image](./assets/postgreuml.png)
+
+
+LAB 4
+
+![UML](./assets/lab4.png)
