@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "lint": "eslint **/*.js",
-    "test": "jest --verbose --coverage",
-    "test-watch": "jest --watchAll --verbose --coverage",
+    "test": "NODE_ENV=test jest --verbose --coverage",
+    "test-watch": "NODE_ENV=test jest --watchAll --verbose --coverage",
     "init:config": "sequelize init:config",
     "db:create": "sequelize db:create"
   },
@@ -23,7 +23,7 @@
     "pg": "^8.11.0",
     "sequelize": "^6.31.1",
     "sequelize-cli": "^6.6.0",
-    "sqlite": "^4.2.0",
+    "sqlite3": "^5.1.6",
     "supertest": "^6.3.3"
   }
 }

@@ -19,16 +19,19 @@ router.get('/food/:id', async (req, res, next) => {
 
 });
 
-// router.delete('/food/:id', async (req, res, next) => {
+router.delete('/food/:id', async(req,res,next)=>{
+  try {
+    let deletedFood = await foodModel.findByPk(req.params.id);
+    await foodModel.destroy({where: {id: req.params.id}});
 
-// });
-// router.delete('/food/:id', async (req, res, next) => {
-//   try {
+    res.status(200).send(deletedFood);
 
-//   } catch (error) {
+  } catch (e) {
+    next(e);
+  }
 
-//   }
-// });
+});
+
 
 router.put('/food/:id', async (req, res, next) => {
   try {
