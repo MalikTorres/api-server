@@ -3,7 +3,7 @@
 const express = require('express');
 
 const router = express.Router();
-const { foodModel } = require('../models/');
+const { foodModel, ingredientsModel } = require('../models');
 
 router.get('/food', async (req, res, next) => {
   let foods = await foodModel.findAll();
@@ -18,6 +18,15 @@ router.get('/food/:id', async (req, res, next) => {
   res.status(200).send(singleFood);
 
 });
+
+// Router with ingredients, relational aspect
+router.get('/foodWithIngredients', async (req, res, next) => {
+  let foods = await foodModel.findAll({include: {model: ingredientsModel}});
+
+  res.status(200).send(foods);
+
+});
+
 
 router.delete('/food/:id', async(req,res,next)=>{
   try {
