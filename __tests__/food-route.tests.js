@@ -19,7 +19,7 @@ afterAll( async () => {
 
 describe('Food router', () => {
   test('handles create route', async () => {
-    const response = (await request.post('/food')).send({name: 'test', flavor: 'test'});
+    const response = await request.post('/food').send({name: 'test', flavor: 'test'});
     expect(response.status).toEqual(200);
     expect(response.body.name).toEqual('test');
   });
