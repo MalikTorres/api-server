@@ -3,6 +3,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const foods = require('./food');
 const ingredients = require('./ingredients');
+const Collection = require('./collection');
 
 // not test friendly
 //const DATABASE_URL = process.env.DATABASE_URL;
@@ -25,7 +26,8 @@ ingredientsModel.belongsTo(foodModel);
 
 module.exports = {
   sequelizeDatabase,
-  foodModel,
+  food: new Collection(foodModel),
   ingredientsModel,
+  // ingredients: new Collection(ingredientsModel),
 };
 
