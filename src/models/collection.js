@@ -25,12 +25,36 @@ class Collection {
         return records;
       }
     } catch (e) {
-      console.error('we have a ModelInterface create error', e);
+      console.error('we have a ModelInterface read error', e);
       return e;
     }
   }
 
+  async update(data, id) {
+    try {
+      await this.model.update(data, { where: { id } });
+      let updatedRecord = await this.model.findByPk(id);
+      return updatedRecord;
+    } catch (e) {
+      console.error('we have a ModelInterface update error', e);
+      return e;
+    }
+  }
+
+  async delete(id) {
+    try {
+      const deletedRecord = await this.model.findByPk(id);
+      await this.model.destroy({where: { id }});
+      // to get the result from the function
+      return deletedRecord;
+
+    } catch (e) {
+      console.error('we have a ModelInterface delete error', e);
+      return e;
+    }
+  }
 
 }
 
 module.exports = Collection;
+

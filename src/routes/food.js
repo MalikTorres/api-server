@@ -21,7 +21,7 @@ router.get('/food/:id', async (req, res, next) => {
 
 // Router with ingredients, relational aspect
 router.get('/foodWithIngredients', async (req, res, next) => {
-  let foods = await foodModel.findAll({ include: { model: ingredientsModel } });
+  let foods = await food.findAll({ include: { model: ingredientsModel } });
 
   res.status(200).send(foods);
 
@@ -29,7 +29,7 @@ router.get('/foodWithIngredients', async (req, res, next) => {
 
 
 router.get('/foodWithSingleIngredient/:id', async (req, res, next) => {
-  let foods = await foodModel.findAll({
+  let foods = await food.findAll({
     include: { model: ingredientsModel },
     where: { id: req.params.id },
   });
@@ -40,11 +40,8 @@ router.get('/foodWithSingleIngredient/:id', async (req, res, next) => {
 
 router.delete('/food/:id', async (req, res, next) => {
   try {
-    let deletedFood = await foodModel.findByPk(req.params.id);
-    await foodModel.destroy({ where: { id: req.params.id } });
-
+    let deletedFood = await food.delete(req.params.id);
     res.status(200).send(deletedFood);
-
   } catch (e) {
     next(e);
   }
@@ -54,18 +51,8 @@ router.delete('/food/:id', async (req, res, next) => {
 
 router.put('/food/:id', async (req, res, next) => {
   try {
-    let foodId = req.params.id;
-    console.log('Id value:', foodId);
-    let data = req.body;
-
-    await foodModel.update(data, {
-      where: {
-        id: foodId,
-      },
-    });
-    let updatedFood = await foodModel.findAll({ where: { id: req.params.id } });
+    let updatedFood = await food.update(req.body, req.params.id);
     res.status(201).send(updatedFood);
-
   } catch (error) {
     next(error);
   }
