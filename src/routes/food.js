@@ -3,7 +3,7 @@
 const express = require('express');
 
 const router = express.Router();
-const { food, ingredientsModel } = require('../models');
+const { food, ingredients } = require('../models');
 
 router.get('/food', async (req, res, next) => {
   let foods = await food.read();
@@ -21,16 +21,16 @@ router.get('/food/:id', async (req, res, next) => {
 
 // Router with ingredients, relational aspect
 router.get('/foodWithIngredients', async (req, res, next) => {
-  let foods = await food.findAll({ include: { model: ingredientsModel } });
+  let foods = await food.read(null,{ include: { model: ingredients.model} });
 
   res.status(200).send(foods);
 
 });
 
-
+// Assiging first argument to null as the first parameter in collections takes in a null value before reaching the options object
 router.get('/foodWithSingleIngredient/:id', async (req, res, next) => {
-  let foods = await food.findAll({
-    include: { model: ingredientsModel },
+  let foods = await food.read(null,{
+    include: { model: ingredients.model },
     where: { id: req.params.id },
   });
 

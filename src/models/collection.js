@@ -14,12 +14,15 @@ class Collection {
       return e;
     }
   }
-
-  async read(id = null) {
+  // the parameters are initialized to a null value before the function is ran
+  async read(id = null, options = null) {
     try {
       if (id) {
         const singleRecord = await this.model.findByPk(id);
         return singleRecord;
+      } else if (options) {
+        const records = await this.model.findAll(options);
+        return records;
       } else {
         const records = await this.model.findAll();
         return records;
@@ -44,7 +47,7 @@ class Collection {
   async delete(id) {
     try {
       const deletedRecord = await this.model.findByPk(id);
-      await this.model.destroy({where: { id }});
+      await this.model.destroy({ where: { id } });
       // to get the result from the function
       return deletedRecord;
 
