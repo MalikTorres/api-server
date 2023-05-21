@@ -3,11 +3,12 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const foods = require('./food');
 const ingredients = require('./ingredients');
+const Collection = require('./collection');
 
 // not test friendly
 //const DATABASE_URL = process.env.DATABASE_URL;
 //Will make dynamic for testing envionrment(notes from demo)
-const DATABASE_URL = process.env.NODE_ENV === 'test' ? 'sqlite ::memory:' : process.env.DATABASE_URL;
+const DATABASE_URL = process.env.NODE_ENV === 'test' ? 'sqlite::memory:' : process.env.DATABASE_URL;
 
 // database singleton(One instance of our sequelized database)
 const sequelizeDatabase = new Sequelize(DATABASE_URL);
@@ -20,12 +21,12 @@ const ingredientsModel = ingredients(sequelizeDatabase, DataTypes);
 
 
 // create associations
-// foodModel.hasMany(ingredientsModel);
-// ingredientsModel.belongsTo(foodModel);
+foodModel.hasMany(ingredientsModel);
+ingredientsModel.belongsTo(foodModel);
 
 module.exports = {
   sequelizeDatabase,
-  foodModel,
-  ingredientsModel,
+  food: new Collection(foodModel),
+  ingredients: new Collection(ingredientsModel),
 };
 
